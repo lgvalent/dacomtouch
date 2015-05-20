@@ -1,0 +1,103 @@
+<html>
+
+<script>
+
+
+
+	function submitAction(){
+      var link = document.location.href;
+      var searchString = "redirect=";
+      var equalIndex = link.indexOf(searchString);
+      var redirectUrl = "";
+
+      if (document.forms[0].action == "") {
+      var url = window.location.href;
+      var args = new Object();
+      var query = location.search.substring(1);
+      var pairs = query.split("&");
+          for(var i=0;i<pairs.length;i++){
+              var pos = pairs[i].indexOf('=');
+              if(pos == -1) continue;
+              var argname = pairs[i].substring(0,pos);
+              var value = pairs[i].substring(pos+1);
+              args[argname] = unescape(value);
+          }
+          document.forms[0].action = args.switch_url;       
+      }       
+      if(equalIndex >= 0) {
+            equalIndex += searchString.length;
+            redirectUrl = "";
+            redirectUrl += link.substring(equalIndex);
+      }
+      if(redirectUrl.length > 255)
+      redirectUrl = redirectUrl.substring(0,255);
+      document.forms[0].redirect_url.value = redirectUrl;
+      document.forms[0].buttonClicked.value = 4;
+      document.forms[0].submit();
+}
+
+
+function change_case()
+{
+// This function changes username input from upper-case to lower-case
+// If the radius-server used cannot perform this function, 
+// the WLC will:
+document.form1.username.value=document.form1.username.value.toLowerCase();
+}
+
+function loadAction(){
+     var url = window.location.href;
+     var args = new Object();
+     var query = location.search.substring(1);
+     var pairs = query.split("&");
+     for(var i=0;i<pairs.length;i++){
+          var pos = pairs[i].indexOf('=');
+          if(pos == -1) continue;
+          var argname = pairs[i].substring(0,pos);
+          var value = pairs[i].substring(pos+1);
+          args[argname] = unescape(value);
+     }
+
+
+     document.forms[0].action = args.switch_url;
+
+     // This is the status code returned from webauth login action
+     // Any value of status code from 1 to 5 is error condition and user
+     // should be shown error as below or modify the message as it suits
+     // the customer
+
+     if(args.statusCode == 1){
+        alert("You are already logged in. No further action is required on your part.");
+     }
+     else if(args.statusCode == 2){
+        alert("You are not configured to authenticate against web portal. No further action is required on your part.");
+     }
+     else if(args.statusCode == 3){
+        alert("The username specified cannot be used at this time. Perhaps the user is already logged into the system?");
+     }
+     else if(args.statusCode == 4){
+        alert("Wrong username and password. Please try again.");
+     }
+     else if(args.statusCode == 5){
+        alert("The User Name and Password combination you have entered is invalid.  Please try again.");
+     }
+}
+
+
+</script>
+
+<body>
+<form name="form1" action="https://1.1.1.1/fs/customwebauth/login.html?ap_mac=64:ae:0c:91:7b:70&client_mac=00:25:56:19:3f:09&wlan=UTFPRWEB" method="post">
+ <input name="buttonClicked" size="16" maxlength="15" value="4" type="hidden">
+ <input name="redirect_url" size="255" maxlength="255" value="www.google.com" type="hidden">
+ <input name="err_flag" size="16" maxlength="15" value="0" type="hidden">
+ <input type="TEXT" name="username" SIZE="25" MAXLENGTH="63" VALUE="lgvalentin">
+ <input type="password" name="password" SIZE="25" MAXLENGTH="24">
+ <input type="submit" name="Submit" value="Enviar" class="button">
+</form>
+
+
+  <button onclick="login()" > Teste </button>
+</body>
+
+</html>

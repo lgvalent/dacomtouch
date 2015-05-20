@@ -1,0 +1,110 @@
+#menu {
+text-align: right;
+position: fixed;
+right: 20px;
+bottom: 10px;
+
+z-index:100;
+opacity: 0.8;
+}
+
+#msg {
+color: green;
+font-family: Arial;
+font-size: 12px;
+font-weight: bold;
+z-index:200;
+}
+
+form{
+	display:none;
+}
+
+.divGrid {
+	width: 100%;
+	height: 100%;
+}
+
+.divImg {
+	float: left;
+	border: 2px solid transparent;
+	border-left: 2px solid transparent;
+	border-right: 3px solid transparent;
+	width: 130px;
+	height: 130px;
+}
+
+.divImg:hover {
+	color: green;
+	border-radius: 10px;
+	box-shadow: 0px 0px 16px green;
+}
+
+.img {
+	float:left;
+	width: 130px;
+	height: 130px;
+	border-radius: 7px;
+}
+
+.divStatus{
+	pointer-events: none; // Evitando que o DivStatus pegue o click
+	width: 130px;
+	height: 30px;
+
+	top: 100px;
+	position: relative;
+}
+
+.available{
+	display: inline;
+	border-color: green;
+	border-radius: 10px;
+}
+
+.unavailable{
+	display: inline;
+}
+
+.serving{
+	display: inline;
+	border-color: green;
+	border-radius: 10px;
+}
+
+.available>.img{
+	opacity: 1;
+}
+
+.unavailable>.img{
+	opacity: 0.3;
+}
+
+.serving>.img{
+	opacity: 1;
+}
+
+.outOfThisRoom{
+	display:  none;
+}
+
+.available>.divStatus{
+//	background: url("img/available.png");
+	background-repeat: no-repeat;
+	background-position: right;
+	opacity: 0.8;
+//	border: solid 1px green;
+}
+
+.unavailable>.divStatus{
+	opacity: 0.8;
+//	background: url("img/unavailable.png");
+//	border: solid 1px red;
+}
+
+.serving>.divStatus{
+	background: url("img/serving.png");
+	background-repeat: no-repeat;
+	background-position: right;
+	opacity: 0.8;
+}
