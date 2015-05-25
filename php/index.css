@@ -1,19 +1,27 @@
 #menu {
-text-align: right;
-position: fixed;
-right: 20px;
-bottom: 10px;
+	text-align: right;
+	position: fixed;
+	right: 20px;
+	bottom: 10px;
 
-z-index:100;
-opacity: 0.8;
+	z-index:100;
+	opacity: 0.8;
 }
 
 #msg {
-color: green;
-font-family: Arial;
-font-size: 12px;
-font-weight: bold;
-z-index:200;
+	color: green;
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: bold;
+	z-index:200;
+}
+
+#keyboard{
+	z-index:200;
+	position: fixed;
+//	float: left;
+//	top: 70%;
+//	left: 50%;
 }
 
 form{

@@ -6,14 +6,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title>Presença DACOM - v0.1b</title>
-	<link rel="stylesheet" type="text/css" href="index.css" >
-	<!--link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script-->
-	<link rel="stylesheet" href="jQuery/jquery-ui.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<!--script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<link rel="stylesheet" href="jQuery/jquery-ui.css"-->
 	<script src="jQuery/jquery-1.10.2.js"></script>
 	<script src="jQuery/jquery-ui.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="index.css" >
 	<script src="index.js"></script>
+
+	<script src="keyboard.js"></script>
+
 	<script>
 	<?php 
 
@@ -28,6 +32,15 @@
 		}else{
 			echo "var sala = 999;\n";
 			$_SESSION['sala'] = 999;
+		}
+
+		if($_REQUEST['device'])
+			$_SESSION['device'] = true;
+
+		if($_SESSION['device']){
+			echo "var device = true;\n";
+		}else{
+			echo "var device = false;\n";
 		}
 
 		if($_POST['nome'] && $_POST['password']){
@@ -73,7 +86,7 @@
 </head>
 
 <body>
-	<form id="formLogin" align="center" action="index.php" method="post" title="Troca de status">
+	<form id="formLogin" align="center" method="post" title="Troca de status" >
 		<table>
 		<tr>
 			<td>
@@ -111,6 +124,7 @@
 		<img id="pause" onclick="pauseReload();" src="img/pause.png" width=40 height=40 title="Desabilitar atualização automática"/><br/>
 		<span id="msg" />
 	</div>
-	<div id="dialog" title="Basic dialog" />
+	<div id="dialog" title="Basic dialog" ></div>
+	<div id="keyboard" title="Virtua Keyboard"></div>
 </body>
 </html>

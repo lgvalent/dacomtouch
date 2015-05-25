@@ -1,5 +1,5 @@
 <?php
-	$link = mysql_connect('localhost', 'dacom', 'xxxxxx');
+	$link = mysql_connect('localhost', 'dacom', 'xxxxx');
 	if (!$link) {
 		die('Não foi possível conectar: ' . mysql_error());
 	}

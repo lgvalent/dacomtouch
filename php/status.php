@@ -9,8 +9,8 @@
 	}
 	echo '{"pessoas":'.json_encode($var).', "hora": "'.date('d/m/y H:i:s').'"}';
 
-	// Atualiza na sala a data da última atualização
-	if($_REQUEST['sala'])
+	// Atualiza na sala a data da última atualização se for um dispositivo
+	if($_REQUEST['device'])
 		mysql_query("UPDATE sala SET ultimaAtualizacao = NOW() WHERE id = ".$_REQUEST['sala']);
 
 	mysql_close($link);

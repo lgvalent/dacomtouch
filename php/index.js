@@ -7,7 +7,8 @@ $(document).ready(function(){
 		$('#formLogin').dialog("close");
 	});
 
-	$(".img").click(login);
+	$(".img").click(openLogin);
+	$("#formLogin").submit(submitLogin);
 
 	// Cria a lista das salas e verifica se tem alguma sala definida
 	$.each(salas, function (k, v) {
@@ -27,13 +28,21 @@ $(document).ready(function(){
 	playReload();
 });
 
-function login(event){
+function openLogin(event){
 	var nome = event.target.parentNode.id;
 
-	$('#formLogin').dialog({modal:true, width: 350});
+	$('#formLogin').dialog({
+			modal:true, 
+			width: 350, 
+			close: function() {
+					if(device)
+						vKeyboard.Show(false);
+				}
+			});
 
 	document.getElementById("imgLogin").src = event.target.src;
 	document.getElementById("nome").value = nome;
+	document.getElementById("password").value = "";
 	document.getElementById("password").focus();
 
 	// Seleciona a sala de acordo com a última sala retornada pelo status.php
@@ -49,7 +58,26 @@ function login(event){
 		}
 	}
 
+	// Só mostra o teclado em tablets fixos
+	if(device)
+		showKeyboard();
+
 	beep();
+}
+
+// http://api.jquery.com/jquery.post/
+function submitLogin(event){
+	var posting = $.post( "login.php", $( "#formLogin" ).serialize(), null, 'json');
+	posting.done(
+		function (data){
+			$('#formLogin').dialog("close");
+			if(data.error)
+				updateMsg(data.msg);
+			else
+				updateAll();
+		}
+	);
+	return false;
 }
 
 function unavailableElement(elem){
@@ -75,9 +103,9 @@ function disableAll(){
 
 function updateAll(){
 	disableAll();
-	var url="status.php?sala=" + sala;
+	var url="status.php?sala=" + sala + "&device=" + device;
 	$.getJSON(url,function(data){
-		// Obtém o status ds pessoas no servidor
+		// Obtém o status das pessoas no servidor
 		pessoas = data.pessoas;
 		$.each(pessoas, function(i,pessoa){
 			var p = $("#" + pessoa.nome)[0];
@@ -94,11 +122,15 @@ function updateAll(){
 						break;
 			}
 		});
-		// Obtém atualiza a hora
-		var msg = $("#msg")[0];
-		var select = $("#sala")[0]; 
-		msg.innerHTML = select.options[select.selectedIndex].text + " (" + data.hora + ")";
+		// Obtém a hora
+		updateMsg(" (" + data.hora + ")");
 	});
+}
+
+function updateMsg(addMsg){
+	var msg = $("#msg")[0];
+	var select = $("#sala")[0]; 
+	msg.innerHTML = select.options[select.selectedIndex].text + (addMsg?"<br>"+addMsg:"");
 }
 
 var error = false;
@@ -145,3 +177,50 @@ function beep(){
 	audio.playbackRate = 2.0;
 	audio.play();
 }
+
+var vKeyboard = null;
+
+function showKeyboard(){
+	if(!vKeyboard){
+		vKeyboard = new VATMpad("keyboard",     // container's id
+					pad_callback, // reference to the callback function
+                         "Arial",           // font name ("" == system default)
+                         "32px",       // font size in px
+                         "#005",       // font color
+                         "#00F",       // keyboard base background color
+                         "#EEF",       // keys' background color
+                         "#777",       // border color
+                         false,         // show key flash on click? (false by default)
+                         "#CC3300",    // font color for flash event
+                         "#FF9966",    // key background color for flash event
+                         "#CC3300",    // key border color for flash event
+                         false,        // embed VNumpad into the page?
+                         true);        // use 1-pixel gap between the keys?
+
+	} else vKeyboard.Show(true);
+
+	// Posiciona o Keyboard
+	var x = 0, y = 0;
+	var o = $("#password")[0];
+	while(o){
+		x += o.offsetLeft;
+		y += o.offsetTop;
+
+		o = o.offsetParent;
+	}
+	var k = $("#keyboard")[0];
+	k.style.left = x;
+	k.style.top = y+70;
+}
+
+// Advanced callback function:
+function pad_callback(ch){
+	var text = $("#password")[0]; 
+
+	switch(ch){
+		case "Enter": submitLogin();break;
+		default: text.value += ch;
+	}
+}
+
+
