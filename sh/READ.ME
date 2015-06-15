@@ -8,11 +8,14 @@ To install the script, use the following command:
 svn co https://github.com/lgvalent/dacomtouch/trunk/sh /home/$USER/opt/dacomTouch
 
 The script can be run manually or can be installed in the crontab to often run in the background.
-To setup the script on the crontab and still have a record of the status updates, add the following line to the end of file "/etc/crontab":
-
-*/5 *     * * *   root cd SCRIPT_DIR && ./setstatus.sh>>/tmp/dacomTouch.log
+To setup the script on the crontab and still have a record of the status updates, add the following line to the end of file "/etc/crontab".
+Use the following commands:
+sudo su [ENTER]
+echo "*/5 *     * * *   root cd /home/$SUDO_USER/opt/dacomTouch && ./setstatus.sh>>/tmp/dacomTouch.log">>/etc/crontab
 
 The parameter */5 states that this script should run every 5 minutes.
+The variable $SUDO_USER is defined in Ubuntu distributions.
+
 Some Linux distributions do not properly display the hidden WIFI list when the command is executed as "root".
 In this case, change the statement above and root with your login. Your login must be allowed to run iwlist command.
 To find out whether or not you need this change, run the following command and verify that the "UTFPRADM" and "dacom" networks appear in the list:
