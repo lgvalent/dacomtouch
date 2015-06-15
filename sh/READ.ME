@@ -1,17 +1,16 @@
+The setstaus.sh script detects the presence of networks "dacom" and "UTFPRADM".
+If the network "racom" is in range, the script sets the status to AVAILABLE.
+If only the network "UTFPRADM" is in range, the script sets the status to IN CLASSROOM.
+Otherwise, the script sets the status to UNAVAILABLE.
 
-O script setstaus.sh detecta a presença das redes  "dacom" e "UTFPRADM".
-Se a rede "dacom" estiver no alcance, o script definirá o status para DISPONÍVEL.
-Se somente a rede "UTFPRADM" estiver no alcance, o script definirá o status para EM AULA.
-Caso contrário, o script definirá o status para INDISPONÍVEL.
+The script can be run manually or can be installed in the crontab to often run in the background.
+To install the script on the crontab and still have a record of the status updates, add the following line to the end of file "/etc/crontab":
 
-O script pode ser executado manualmente ou pode ser instalado no crontab para ser frequentemente executado em segundo plano.
-Para instalar o script no crontab e ainda ter um relatório das atualizações dos status, acrescente a seguinte linha no final do arquivo "/etc/crontab":
+*/5 *     * * *   root   cd SCRIPT_DIR && ./setstatus.sh>>/tmp/dacomTouch.out
 
-*/5 *     * * *   root   cd DIRETORIO_ONDE_ESTA_O_SCRIPT && ./setstatus.sh>>/tmp/dacomTouch.log
-
-O parâmetro */5 define que este script deverá ser executado a cada 5 minutos.
-Algumas distribuições Linux não exibem corretamente a lista de WIFI acultas já identificadas pelo usuário se o comando for executado pelo "root". 
-Neste caso, altere na instrução acima o usuário root para seu login. Seu login deve ter permissão para executar o comando iwlist.
-Para saber se você precisa ou não dessa alteração, execute o seguinte comando e verifique se as redes UTFPRADM e dacom aparecem na lista:
+The parameter */5 states that this script should run every 5 minutes.
+Some Linux distributions do not properly display the hidden WIFI list when the command is executed as "root".
+In this case, change the statement above and root with your login. Your login must be allowed to run iwlist command.
+To find out whether or not you need this change, run the following command and verify that the "UTFPRADM" and "dacom" networks appear in the list:
 
 sudo iwlist scan | grep SSID
