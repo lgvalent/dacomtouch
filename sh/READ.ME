@@ -3,10 +3,14 @@ If the network "racom" is in range, the script sets the status to AVAILABLE.
 If only the network "UTFPRADM" is in range, the script sets the status to IN CLASSROOM.
 Otherwise, the script sets the status to UNAVAILABLE.
 
-The script can be run manually or can be installed in the crontab to often run in the background.
-To install the script on the crontab and still have a record of the status updates, add the following line to the end of file "/etc/crontab":
+To install the script, use the following command:
 
-*/5 *     * * *   root   cd SCRIPT_DIR && ./setstatus.sh>>/tmp/dacomTouch.out
+svn co https://github.com/lgvalent/dacomtouch/trunk/sh /home/$USER/opt/dacomTouch
+
+The script can be run manually or can be installed in the crontab to often run in the background.
+To setup the script on the crontab and still have a record of the status updates, add the following line to the end of file "/etc/crontab":
+
+*/5 *     * * *   root cd SCRIPT_DIR && ./setstatus.sh>>/tmp/dacomTouch.log
 
 The parameter */5 states that this script should run every 5 minutes.
 Some Linux distributions do not properly display the hidden WIFI list when the command is executed as "root".
