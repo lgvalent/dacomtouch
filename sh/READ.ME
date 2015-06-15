@@ -1,0 +1,17 @@
+
+O script detecta a presença das redes  "dacom" e "UTFPRADM".
+Se a rede "dacom" estiver no alcance, o script definirá o status para DISPONÍVEL.
+Se somente a rede "UTFPRADM" estiver no alcance, o script definirá o status para EM AULA.
+Caso contrário, o script definirá o status para INDISPONÍVEL.
+
+O script pode ser executado manualmente ou pode ser instalado no crontab para ser frequentemente executado em segundo plano.
+Para instalar o script no crontab e ainda ter um relatório das atualizações dos status, acrescente a seguinte linha no final do arquivo "/etc/crontab":
+
+*/5 *     * * *   root   cd DIRETORIO_ONDE_ESTA_O_SCRIPT && ./set-status-presenca-dacom.sh>>/tmp/dacomTouch.log
+
+O parâmetro */5 define que este script deverá ser executado a cada 5 minutos.
+Algumas distribuições Linux não exibem corretamente a lista de WIFI acultas já identificadas pelo usuário se o comando for executado pelo "root". 
+Neste caso, altere na instrução acima o usuário root para seu login. Seu login deve ter permissão para executar o comando iwlist.
+Para saber se você precisa ou não dessa alteração, execute o seguinte comando e verifique se as redes UTFPRADM e dacom aparecem na lista:
+
+sudo iwlist scan | grep SSID
