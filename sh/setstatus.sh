@@ -3,7 +3,8 @@
 # Script para definição de status no sistema de presença do DACOM.
 # autor: rogerioag@utfpr.edu.br
 
-echo "Start: $0."
+
+echo "Iniciando: $0 com STATUS padrão = $1."
 echo "Definindo status no sistema de presença:"`date`
 # Configurações.
 URL="https://dacom.valentin.com.br/login.php"
@@ -94,6 +95,12 @@ chooseStatus() {
 # Define o status padrão: Indisponível.
 STATUS=0;
 MSG="Indisponível";
+if [ ! -z "$1" ]
+then
+	STATUS=$1;
+	MSG="Status definido para $1";
+fi
+
 # Recupera a lista de SSIDs.
 INTERFACES=`iwlist scan 2>/dev/null | awk -F":" '/ESSID/{print $2}' | sed 's/ /_/'`
 
@@ -120,7 +127,7 @@ then
 	# Define um status padrão Indisponível=0.
 	STATUS=3;
 else
-	debug "Definindo STATUS_0"
+	debug "Definindo STATUS_DEFAULT"
 	# SSID não está na lista. Está fora da UTFPR.
 	echo "Fora da UTFPR.";
 	# Define um status padrão Indisponível=0.
