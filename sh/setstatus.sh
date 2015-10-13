@@ -129,9 +129,7 @@ then
 else
 	debug "Definindo STATUS_DEFAULT"
 	# SSID não está na lista. Está fora da UTFPR.
-	echo "Fora da UTFPR.";
-	# Define um status padrão Indisponível=0.
-	STATUS=0;
+	echo "Status padrão: $STATUS";
 fi
 fi
 
