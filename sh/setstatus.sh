@@ -7,7 +7,7 @@
 echo "Iniciando: $0 com STATUS padrão = $1."
 echo "Definindo status no sistema de presença:"`date`
 # Configurações.
-URL="https://dacom.valentin.com.br/login.php"
+URL="https://valentin.com.br/dacom/login.php"
 SALA=`cat sala.txt | awk '{$1=$1;print}'`
 NOME=`cat professor.txt | awk '{$1=$1;print}'`
 PASSWORD=`cat password.txt | awk '{$1=$1;print}'`
