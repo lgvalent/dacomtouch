@@ -102,6 +102,7 @@
 				<option value="0">Indisponível</option>
 				<option value="1">Presente</option>
 				<option value="2">PAluno</option>
+				<option value="3">Aula</option>
 			</select>
 			<input type="submit" value="Enviar" >
 			</td>
@@ -122,10 +123,11 @@
 	<div id="menu" >
 		<img id="reload" onclick="updateAll();" src="img/refresh.png" width=40 height=40 title="Atualizar"/>
 		<img id="play" onclick="playReload();" src="img/play.png" width=40 height=40 title="Habilitar atualização automática" />
-		<img id="pause" onclick="pauseReload();" src="img/pause.png" width=40 height=40 title="Desabilitar atualização automática"/><br/>
-		<span id="msg" />
+		<img id="pause" onclick="pauseReload();" src="img/pause.png" width=40 height=40 title="Desabilitar atualização automática"/><br>
+		<span id="msg"></span>
 	</div>
 	<div id="dialog" title="Basic dialog" ></div>
 	<div id="keyboard" title="Virtua Keyboard"></div>
+
 </body>
 </html>

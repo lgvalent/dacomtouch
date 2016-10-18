@@ -64,54 +64,67 @@ form{
 	position: relative;
 }
 
-.available{
-	display: inline;
-	border-color: green;
-	border-radius: 10px;
-}
-
-.unavailable{
-	display: inline;
-}
-
-.serving{
-	display: inline;
-	border-color: green;
-	border-radius: 10px;
-}
-
-.available>.img{
-	opacity: 1;
-}
-
-.unavailable>.img{
-	opacity: 0.3;
-}
-
-.serving>.img{
-	opacity: 1;
-}
-
 .outOfThisRoom{
 	display:  none;
 }
 
-.available>.divStatus{
-//	background: url("img/available.png");
+.status0{
+	display: inline;
+}
+
+.status1{
+	display: inline;
+	border-color: green;
+	border-radius: 10px;
+}
+
+.status2{
+	display: inline;
+	border-color: green;
+	border-radius: 10px;
+}
+
+.status3{
+	display: inline;
+	border-color: green;
+	border-radius: 10px;
+}
+
+.status0>.img{
+	opacity: 0.3;
+}
+
+.status1>.img{
+	opacity: 1;
+}
+
+.status2>.img{
+	opacity: 1;
+}
+
+.status0>.divStatus{
+	opacity: 0.8;
+//	background: url("img/status0.png");
+//	border: solid 1px red;
+}
+
+.status1>.divStatus{
+//	background: url("img/status1.png");
 	background-repeat: no-repeat;
 	background-position: right;
 	opacity: 0.8;
 //	border: solid 1px green;
 }
 
-.unavailable>.divStatus{
+.status2>.divStatus{
+	background: url("img/status2.png");
+	background-repeat: no-repeat;
+	background-position: right;
 	opacity: 0.8;
-//	background: url("img/unavailable.png");
-//	border: solid 1px red;
 }
 
-.serving>.divStatus{
-	background: url("img/serving.png");
+.status3>.divStatus{
+	background: url("img/status3.png");
 	background-repeat: no-repeat;
 	background-position: right;
 	opacity: 0.8;

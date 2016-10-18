@@ -62,7 +62,6 @@ function openLogin(event){
 	if(device)
 		showKeyboard();
 
-	beep();
 }
 
 // http://api.jquery.com/jquery.post/
@@ -73,23 +72,14 @@ function submitLogin(event){
 			$('#formLogin').dialog("close");
 			if(data.error)
 				updateMsg(data.msg);
-			else
+			else{
+				var s = document.getElementById("sala");
+				sala = s.options[s.selectedIndex].value;
 				updateAll();
+			}
 		}
 	);
 	return false;
-}
-
-function unavailableElement(elem){
-	elem.className = "divImg unavailable";
-}
-
-function availableElement(elem){
-	elem.className = "divImg available";
-}
-
-function servingElement(elem){
-	elem.className = "divImg serving";
 }
 
 function disableAll(){
@@ -102,23 +92,23 @@ function disableAll(){
 }
 
 function updateAll(){
-	disableAll();
 	var url="status.php?sala=" + sala + "&device=" + device;
 	$.getJSON(url,function(data){
+		disableAll();
 		// Obtém o status das pessoas no servidor
 		pessoas = data.pessoas;
 		$.each(pessoas, function(i,pessoa){
 			var p = $("#" + pessoa.nome)[0];
 			//console.log("atualizando: " + pessoa.nome + "(" + pessoa.disponivel + ")");
+			p.className = "divImg status"+pessoa.disponivel;
 			switch(pessoa.disponivel){
-				case "0":	unavailableElement(p);
-						p.children[0].title = pessoa.nome + " não está disponível.";
+				case "0":	p.children[0].title = pessoa.nome + " não está disponível.";
 						break;
-				case "1":	availableElement(p);
-						p.children[0].title = pessoa.nome + " está na " + pessoa.sala;
+				case "1":	p.children[0].title = pessoa.nome + " está na " + pessoa.sala;
 						break;
-				case "2":	servingElement(p);
-						p.children[0].title = pessoa.nome + " está em PAluno na " + pessoa.sala;
+				case "2":	p.children[0].title = pessoa.nome + " está em PAluno na " + pessoa.sala;
+						break;
+				case "3":	p.children[0].title = pessoa.nome + " está em Aula";
 						break;
 			}
 		});
