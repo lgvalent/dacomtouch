@@ -1,0 +1,32 @@
+PONTO A
+
+Interface{address=F0:29:29:14:C8:B1, quality=78, signal_level=-55, essid=UTFPRWEB}
+
+Interface{address=F0:29:29:14:C8:B1, quality=94, signal_level=-44, essid=UTFPRWEB}]
+
+[Interface{address=F0:29:29:14:C8:B1, quality=94, signal_level=-44, essid=UTFPRWEB}]
+
+Interface{address=F0:29:29:14:C8:B1, quality=80, signal_level=-54, essid=UTFPRWEB}]
+
+Interface{address=F0:29:29:14:C8:B1, quality=75, signal_level=-57, essid=UTFPRWEB}, Interface{address=F0:29:29:14:C8:B0, quality=75, signal_level=-57, essid=UTFPRADM}, Interface{address=F0:29:29:14:C8:B2, quality=77, signal_level=-56, essid=eduroam}]}]}
+
+Interface{address=F0:29:29:14:C8:B1, quality=75, signal_level=-57, essid=UTFPRWEB}]}]}
+
+Interface{address=F0:29:29:14:C8:B1, quality=81, signal_level=-53, essid=UTFPRWEB}]}]}
+
+
+
+PONTO B
+
+Interface{address=F0:29:29:14:C8:B1, quality=80, signal_level=-54, essid=UTFPRWEB}, Interface{address=F0:29:29:14:C8:B2, quality=77, signal_level=-56, essid=eduroam}, Interface{address=F0:29:29:14:C8:B0, quality=78, signal_level=-55, essid=UTFPRADM}]}
+
+Interface{address=F0:29:29:14:C8:B1, quality=80, signal_level=-54, essid=UTFPRWEB}]
+
+Interface{address=F0:29:29:14:C8:B1, quality=80, signal_level=-54, essid=UTFPRWEB}]
+
+Interface{address=F0:29:29:14:C8:B1, quality=81, signal_level=-53, essid=UTFPRWEB}, Interface{address=F0:29:29:14:C8:B2, quality=80, signal_level=-54, essid=eduroam}, Interface{address=F0:29:29:14:C8:B0, quality=80, signal_level=-54, essid=UTFPRADM}]}]}
+
+Interface{address=F0:29:29:14:C8:B1, quality=77, signal_level=-56, essid=UTFPRWEB}]}]}
+
+Interface{address=F0:29:29:14:C8:B1, quality=82, signal_level=-52, essid=UTFPRWEB}]}]}
+
