@@ -4,8 +4,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -36,14 +34,14 @@ public class Config {
     }
 
     //String url, String name, String password, String room
-    public void writeConfProperties() {
+    public void writeConfProperties(String login, String password) {
         try {
-            output = new FileOutputStream("config.properties");
+            output = new FileOutputStream("src/config.properties");
             // set the properties value
             prop.setProperty("actionURL", "http://valentin.com.br/dacom/login.php");
             prop.setProperty("status", "dacom:1" + ',' + "UTFPRADM:3"+","+"naruto:2");
-            prop.setProperty("user.login", "Kawamoto");
-            prop.setProperty("user.password", "1234");
+            prop.setProperty("user.login", login);
+            prop.setProperty("user.password", password);
             prop.setProperty("user.room", "2");
             // save properties to project root folder
             prop.store(output, null);
@@ -63,7 +61,7 @@ public class Config {
 
     public void readConfProperties() {
         try {
-            input = new FileInputStream("config.properties");
+            input = new FileInputStream("src/config.properties");
             // load a properties file
             prop.load(input);
             // get the property value and print it out

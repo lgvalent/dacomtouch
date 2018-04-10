@@ -19,20 +19,10 @@ import java.util.logging.Logger;
  */
 public class WiFiFinderLinuxImpl implements WiFiFinder {
 
-//    private Config config = new Config();
-//    private String room;
-//    private String name;
-//    private String password;
-//    private String url;
-//    private Status status;
-//    private String[] interf;
     private enum States {
         ADDRESS, QUALITY, ESSID
     };
 
-//    private enum Status {
-//        INDISPONIVEL, DISPONIVEL, PALUNO, AULA
-//    }
     @Override
     public List<Interface> getList() {
         List<Interface> list = new ArrayList<>();
@@ -77,23 +67,6 @@ public class WiFiFinderLinuxImpl implements WiFiFinder {
                 }
             }
             stdInput.close();
-
-//            Config config = new Config();
-//            config.readConfProperties();
-//            Person person = new Person(config);
-//            Status status = WiFiFinder.getStatus(list, person, config);
-//            String[] curl = {"/bin/bash", "-c", "curl -k --data \"room=" + person.getRoom() + "&name=" + person.getName() + "&password=" + person.getPassword() + "&status=" + status + "\" " + person.getUrl()};
-//            System.out.println(curl[2]);
-//            
-//            try {
-//                p = Runtime.getRuntime().exec(curl);
-//                stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
-//                while ((s = stdInput.readLine()) != null) {
-//                    System.out.println(s);
-//                }
-//            } catch (IOException ex) {
-//                Logger.getLogger(WiFiFinderLinuxImpl.class.getName()).log(Level.SEVERE, null, ex);
-//            }
         } catch (IOException ex) {
             Logger.getLogger(WiFiFinderLinuxImpl.class.getName()).log(Level.SEVERE, null, ex);
         }

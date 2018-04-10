@@ -7,7 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,7 +21,7 @@ import org.apache.log4j.Logger;
 public class StatusManager {
 
     private final Config config;
-    private Logger log = Logger.getLogger(Status.class);
+//    private Logger log = Logger.getLogger(Status.class);
     
     
     public StatusManager() {
@@ -58,7 +58,7 @@ public class StatusManager {
 
         con.setDoOutput(true);
 
-        log.debug("Sending data: " + str);
+//        log.debug("Sending data: " + str);
         DataOutputStream out = new DataOutputStream(con.getOutputStream());
         out.writeBytes(str);
 

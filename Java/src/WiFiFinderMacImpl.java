@@ -24,9 +24,6 @@ public class WiFiFinderMacImpl implements WiFiFinder {
         AGRCTLRSSI, BSSID, SSID
     }
 
-//    private enum Status {
-//        INDISPONIVEL, DISPONIVEL, PALUNO, AULA
-//    }
     @Override
     public List<Interface> getList() {
         Process p;

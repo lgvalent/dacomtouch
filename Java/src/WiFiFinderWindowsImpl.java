@@ -67,7 +67,6 @@ public class WiFiFinderWindowsImpl implements WiFiFinder {
                 }
             }
             stdInput.close();
-
         } catch (IOException ex) {
             Logger.getLogger(WiFiFinderWindowsImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
