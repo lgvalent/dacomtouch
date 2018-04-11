@@ -1,5 +1,4 @@
 
-import java.time.Clock;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
@@ -15,25 +14,28 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class DataConfigJDialog extends javax.swing.JDialog {
 
+    private Config config = new Config();
     /**
      * Creates new form NewJDialog
      */
     public DataConfigJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        popFields();
+        
         setLocationRelativeTo(null);
         setVisible(true);
-//        populedComboBox();
     }
     
-    public void populedComboBox(){
-        Json json = new Json();
-        List<Salas> salas = json.loadJson();
+    public void popFields(){
+        loginField.setText(config.getLogin());
+        passwordField.setText(config.getPassword());
         
-        for (Salas s : salas) {
-            System.out.println(s.getNome());
-            salasComboBox.addItem(s);
-        }
+        Json json = new Json();
+        List<Sala> salas = json.loadJson();
+        DefaultComboBoxModel model = new DefaultComboBoxModel(new Vector(salas));
+        salasComboBox.setModel(model);
+        
     }
 
     /**
@@ -57,7 +59,7 @@ public class DataConfigJDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        saveButton.setText("salvar");
+        saveButton.setText("save");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButtonActionPerformed(evt);
@@ -66,7 +68,7 @@ public class DataConfigJDialog extends javax.swing.JDialog {
 
         loginField.setNextFocusableComponent(passwordField);
 
-        cancelButton.setText("Cancelar");
+        cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
@@ -75,17 +77,17 @@ public class DataConfigJDialog extends javax.swing.JDialog {
 
         passwordField.setNextFocusableComponent(saveButton);
 
-        jLabel1.setText("                                       NOVO ARQUIVO DE DADOS");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("PROPERTIES");
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel2.setText("Login: ");
 
-        jLabel3.setText("Senha: ");
+        jLabel3.setText("Password:");
 
-        jLabel4.setText("Sala:");
+        jLabel4.setText("Room:");
 
-        salasComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sala do Coordenador", "Sala de Professores" }));
         salasComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salasComboBoxActionPerformed(evt);
@@ -142,13 +144,12 @@ public class DataConfigJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        Config config = new Config();
-        config.writeConfProperties(loginField.getText(), String.valueOf(passwordField.getPassword()), String.valueOf(salasComboBox.getSelectedIndex()+1));
+        config.writeConfProperties(loginField.getText(), String.valueOf(passwordField.getPassword()), String.valueOf(((Sala)salasComboBox.getSelectedItem()).getId()));
         dispose();
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        System.exit(0);
+        dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void salasComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salasComboBoxActionPerformed
@@ -205,7 +206,7 @@ public class DataConfigJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField loginField;
     private javax.swing.JPasswordField passwordField;
-    private javax.swing.JComboBox<Object> salasComboBox;
+    private javax.swing.JComboBox<Sala> salasComboBox;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 }

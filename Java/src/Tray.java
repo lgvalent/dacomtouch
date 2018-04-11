@@ -24,24 +24,34 @@ public class Tray {
 
         if (SystemTray.isSupported()) {
 
-            Image img = Toolkit.getDefaultToolkit().getImage("lambda.png");
+            Image img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("favicon.png"));
+            
             PopupMenu popMenu = new PopupMenu();
-            MenuItem item1 = new MenuItem("Exit");
+            MenuItem item1 = new MenuItem("Update");
+            MenuItem item2 = new MenuItem("Exit");
             popMenu.add(item1);
+            popMenu.add(item2);
             item1.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    new DataConfigJDialog(null, true);
+                }
+            });
+            item2.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     System.exit(0);
                 }
             });
             TrayIcon trayIcon = new TrayIcon(img, "dacomtouch", popMenu);
             try {
+                trayIcon.setImageAutoSize(true);
                 SystemTray.getSystemTray().add(trayIcon);
+                
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             System.out.println("FOI");
         } else {
-            System.out.println("Sistema não suporta systemTray");
+            System.out.println("SystemTray is not suported!");
         }
     }
 }

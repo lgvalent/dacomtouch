@@ -26,7 +26,7 @@ public class Main {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
        
-        if (!new File("src/config.properties").exists()) {
+        if (!new Config().isExists()) {
             JOptionPane.showMessageDialog(null, "Arquivo de configuração inexistente!!!");
             new DataConfigJDialog(null, true);
         }

@@ -8,10 +8,17 @@
  *
  * @author rafael
  */
-public class Salas {
+public class Sala {
     private int id;
     private String nome;
     private String ultimaAtualizacao;
+
+    @Override
+    public String toString() {
+        return  nome;
+    }
+    
+    
 
     public int getId() {
         return id;

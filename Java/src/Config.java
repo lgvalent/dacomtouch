@@ -18,7 +18,10 @@ import java.util.Properties;
  * @author rafael
  */
 public class Config {
-
+    
+    private static final String FILE_PATH = "config.properties";
+    public static final String HOST = "http://valentin.com.br/dacom/";
+    
     private Properties prop = new Properties();
     private InputStream input = null;
     private OutputStream output = null;
@@ -29,16 +32,23 @@ public class Config {
     private String password;
     private String room;
     private Map<String, Integer> statusMap = new LinkedHashMap<>();
+    private boolean exists = false;
+
+    public boolean isExists() {
+        return exists;
+    }
 
     public Config() {
+        
+        readConfProperties();
     }
 
     //String url, String name, String password, String room
     public void writeConfProperties(String login, String password, String sala) {
         try {
-            output = new FileOutputStream("src/config.properties");
+            output = new FileOutputStream(FILE_PATH);
             // set the properties value
-            prop.setProperty("actionURL", "http://valentin.com.br/dacom/login.php");
+            prop.setProperty("actionURL", HOST + "/login.php");
             prop.setProperty("status", "dacom:1" + ',' + "UTFPRADM:3"+","+"naruto:2");
             prop.setProperty("user.login", login);
             prop.setProperty("user.password", password);
@@ -61,7 +71,7 @@ public class Config {
 
     public void readConfProperties() {
         try {
-            input = new FileInputStream("src/config.properties");
+            input = new FileInputStream(FILE_PATH);
             // load a properties file
             prop.load(input);
             // get the property value and print it out
@@ -83,9 +93,12 @@ public class Config {
             for (Map.Entry<String, Integer> entry : this.statusMap.entrySet()) {
                 System.out.println(entry.getKey() + " = " + entry.getValue());
             }
+            
+            this.exists = true;
 
         } catch (IOException ex) {
             ex.printStackTrace();
+            this.exists = false;
         } finally {
             if (input != null) {
                 try {

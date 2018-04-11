@@ -3,13 +3,9 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,11 +21,10 @@ import java.util.logging.Logger;
  */
 public class Json {
 
-    public List<Salas> loadJson() {
-        List<Salas> salas = null;
+    public List<Sala> loadJson() {
         String json = null;
         try {
-            URL url = new URL("https://valentin.com.br/dacom/status.php");
+            URL url = new URL(Config.HOST + "/status.php");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
@@ -48,12 +43,8 @@ public class Json {
 
         Gson gson = new Gson();
         System.out.println(json);
-        Person person = gson.fromJson(json, Person.class);
+        StatusJson status = gson.fromJson(json, StatusJson.class);
 
-        for (int i = 0; i < person.getSalas().size(); i++) {
-            salas.add(person.getSalas().get(i));
-        }
-        
-        return salas;
+        return status.getSalas();
     }
 }
