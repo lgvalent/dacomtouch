@@ -1,4 +1,7 @@
 
+import java.util.List;
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,49 +14,23 @@
  */
 public class Person {
 
-    private String room;
-    private String name;
-    private String password;
-    private String url;
+    private List<Pessoas> pessoas;
+    private List<Salas> salas;
 
-    public Person(Config config) {
-        config.readConfProperties();
-        room = config.getRoom();
-        name = config.getLogin();
-        password = config.getPassword();
-        url = config.getActionURL();
+    public List<Pessoas> getPessoas() {
+        return pessoas;
     }
 
-    public String getRoom() {
-        return room;
+    public void setPessoas(List<Pessoas> pessoas) {
+        this.pessoas = pessoas;
     }
 
-    public void setRoom(String room) {
-        this.room = room;
+    public List<Salas> getSalas() {
+        return salas;
     }
 
-    public String getName() {
-        return name;
+    public void setSalas(List<Salas> salas) {
+        this.salas = salas;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
+    
 }

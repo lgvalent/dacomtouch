@@ -1,4 +1,5 @@
 
+import java.awt.AWTException;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -17,9 +18,14 @@ import javax.swing.JOptionPane;
 public class Main {
 
     public static void main(String[] args) {
-
-        RoomManager measurements = new RoomManager();
-
+        
+       
+        try {
+            Tray tray = new Tray();
+        } catch (AWTException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
         if (!new File("src/config.properties").exists()) {
             JOptionPane.showMessageDialog(null, "Arquivo de configuração inexistente!!!");
             new DataConfigJDialog(null, true);
@@ -45,6 +51,8 @@ public class Main {
             }
 
         }
+
+        
 
     }
 }

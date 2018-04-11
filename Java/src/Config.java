@@ -34,7 +34,7 @@ public class Config {
     }
 
     //String url, String name, String password, String room
-    public void writeConfProperties(String login, String password) {
+    public void writeConfProperties(String login, String password, String sala) {
         try {
             output = new FileOutputStream("src/config.properties");
             // set the properties value
@@ -42,7 +42,7 @@ public class Config {
             prop.setProperty("status", "dacom:1" + ',' + "UTFPRADM:3"+","+"naruto:2");
             prop.setProperty("user.login", login);
             prop.setProperty("user.password", password);
-            prop.setProperty("user.room", "2");
+            prop.setProperty("user.room", sala);
             // save properties to project root folder
             prop.store(output, null);
 

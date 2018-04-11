@@ -1,0 +1,47 @@
+
+import java.awt.AWTException;
+import java.awt.Image;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
+import java.awt.SystemTray;
+import java.awt.Toolkit;
+import java.awt.TrayIcon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/**
+ *
+ * @author rafael
+ */
+public class Tray {
+
+    public Tray() throws AWTException {
+
+        if (SystemTray.isSupported()) {
+
+            Image img = Toolkit.getDefaultToolkit().getImage("lambda.png");
+            PopupMenu popMenu = new PopupMenu();
+            MenuItem item1 = new MenuItem("Exit");
+            popMenu.add(item1);
+            item1.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    System.exit(0);
+                }
+            });
+            TrayIcon trayIcon = new TrayIcon(img, "dacomtouch", popMenu);
+            try {
+                SystemTray.getSystemTray().add(trayIcon);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            System.out.println("FOI");
+        } else {
+            System.out.println("Sistema não suporta systemTray");
+        }
+    }
+}

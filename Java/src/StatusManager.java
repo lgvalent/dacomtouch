@@ -22,8 +22,7 @@ public class StatusManager {
 
     private final Config config;
 //    private Logger log = Logger.getLogger(Status.class);
-    
-    
+
     public StatusManager() {
         this.config = new Config();
         this.config.readConfProperties();
@@ -73,11 +72,7 @@ public class StatusManager {
         while ((inputLine = in.readLine()) != null) {
             content.append(inputLine);
         }
-        
         System.out.println(content);
-        
-        
-        
         in.close();
         con.disconnect();
 
