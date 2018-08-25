@@ -3,7 +3,6 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
@@ -33,19 +32,20 @@ public class StatusManager {
     }
 
     public void refreshStatus() throws Exception {
+        this.config.readConfProperties();
 
         List<Interface> interfaces = WiFiFinder.getInstance().getList();
-
+                
         for (Map.Entry<String, Integer> entry : this.config.getStatusMap().entrySet()) {
             for (Interface interf : interfaces) {
                 if (interf.getEssid().equals(entry.getKey())) {
-                    this.setStatus(entry.getValue());
+                    setStatus(entry.getValue());
                     return;
                 }
-
             }
-
         }
+        System.out.println("default");
+        setStatus(this.config.getStatus_default_index());
     }
 
     public void setStatus(Integer status) throws Exception {

@@ -27,7 +27,7 @@ public class Tray {
             Image img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("favicon.png"));
             
             PopupMenu popMenu = new PopupMenu();
-            MenuItem item1 = new MenuItem("Update");
+            MenuItem item1 = new MenuItem("Update Properties");
             MenuItem item2 = new MenuItem("Exit");
             popMenu.add(item1);
             popMenu.add(item2);
@@ -49,7 +49,7 @@ public class Tray {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            System.out.println("FOI");
+            System.out.println("TrayIcon sucessfully ");
         } else {
             System.out.println("SystemTray is not suported!");
         }

@@ -9,16 +9,15 @@
  * @author rafael
  */
 public class Sala {
+
     private int id;
     private String nome;
     private String ultimaAtualizacao;
 
     @Override
     public String toString() {
-        return  nome;
+        return nome;
     }
-    
-    
 
     public int getId() {
         return id;
@@ -43,6 +42,5 @@ public class Sala {
     public void setUltimaAtualizacao(String ultimaAtualizacao) {
         this.ultimaAtualizacao = ultimaAtualizacao;
     }
-    
-    
+
 }

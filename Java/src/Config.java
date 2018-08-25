@@ -18,10 +18,10 @@ import java.util.Properties;
  * @author rafael
  */
 public class Config {
-    
+
     private static final String FILE_PATH = "config.properties";
     public static final String HOST = "http://valentin.com.br/dacom/";
-    
+
     private Properties prop = new Properties();
     private InputStream input = null;
     private OutputStream output = null;
@@ -32,6 +32,7 @@ public class Config {
     private String password;
     private String room;
     private Map<String, Integer> statusMap = new LinkedHashMap<>();
+    private int status_default_index;
     private boolean exists = false;
 
     public boolean isExists() {
@@ -39,20 +40,20 @@ public class Config {
     }
 
     public Config() {
-        
         readConfProperties();
     }
 
     //String url, String name, String password, String room
-    public void writeConfProperties(String login, String password, String sala) {
+    public void writeConfProperties(String login, String password, String sala, String status_default) {
         try {
             output = new FileOutputStream(FILE_PATH);
             // set the properties value
             prop.setProperty("actionURL", HOST + "/login.php");
-            prop.setProperty("status", "dacom:1" + ',' + "UTFPRADM:3"+","+"naruto:2");
+            prop.setProperty("status", "dacom:1" + ',' + "UTFPRADM:3");
             prop.setProperty("user.login", login);
             prop.setProperty("user.password", password);
             prop.setProperty("user.room", sala);
+            prop.setProperty("user.status_default", status_default);
             // save properties to project root folder
             prop.store(output, null);
 
@@ -81,6 +82,8 @@ public class Config {
             this.password = prop.getProperty("user.password");
             this.room = prop.getProperty("user.room");
 
+            this.status_default_index = Integer.parseInt(prop.getProperty("user.status_default"));
+
             this.status_priority = this.status.split(",");
             this.statusMap.clear();
 
@@ -93,7 +96,7 @@ public class Config {
             for (Map.Entry<String, Integer> entry : this.statusMap.entrySet()) {
                 System.out.println(entry.getKey() + " = " + entry.getValue());
             }
-            
+
             this.exists = true;
 
         } catch (IOException ex) {
@@ -108,6 +111,14 @@ public class Config {
                 }
             }
         }
+    }
+
+    public int getStatus_default_index() {
+        return status_default_index;
+    }
+
+    public void setStatus_default_index(int status_default_index) {
+        this.status_default_index = status_default_index;
     }
 
     public String getStatus() {

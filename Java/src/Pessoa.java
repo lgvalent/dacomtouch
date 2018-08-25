@@ -1,7 +1,3 @@
-
-import java.util.ArrayList;
-import java.util.List;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,6 +9,7 @@ import java.util.List;
  * @author rafael
  */
 public class Pessoa {
+
     private String nome;
     private int disponivel;
     private String sala;
@@ -40,6 +37,5 @@ public class Pessoa {
     public void setSala(String sala) {
         this.sala = sala;
     }
-    
-    
+
 }
