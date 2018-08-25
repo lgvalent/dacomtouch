@@ -33,6 +33,7 @@ public class Config {
     private String room;
     private Map<String, Integer> statusMap = new LinkedHashMap<>();
     private int status_default_index;
+    private int timer;
     private boolean exists = false;
 
     public boolean isExists() {
@@ -44,7 +45,7 @@ public class Config {
     }
 
     //String url, String name, String password, String room
-    public void writeConfProperties(String login, String password, String sala, String status_default) {
+    public void writeConfProperties(String login, String password, String sala, String status_default, String timer) {
         try {
             output = new FileOutputStream(FILE_PATH);
             // set the properties value
@@ -54,6 +55,7 @@ public class Config {
             prop.setProperty("user.password", password);
             prop.setProperty("user.room", sala);
             prop.setProperty("user.status_default", status_default);
+            prop.setProperty("user.timer", timer);
             // save properties to project root folder
             prop.store(output, null);
 
@@ -81,6 +83,7 @@ public class Config {
             this.login = prop.getProperty("user.login");
             this.password = prop.getProperty("user.password");
             this.room = prop.getProperty("user.room");
+            this.timer = Integer.parseInt(prop.getProperty("user.timer"));
 
             this.status_default_index = Integer.parseInt(prop.getProperty("user.status_default"));
 
@@ -111,6 +114,14 @@ public class Config {
                 }
             }
         }
+    }
+
+    public int getTimer() {
+        return timer;
+    }
+
+    public void setTimer(int timer) {
+        this.timer = timer;
     }
 
     public int getStatus_default_index() {

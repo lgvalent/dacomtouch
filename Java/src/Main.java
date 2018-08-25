@@ -43,7 +43,7 @@ public class Main {
             }
 
             try {
-                TimeUnit.SECONDS.sleep(10);
+                TimeUnit.SECONDS.sleep(new Config().getTimer());
 //                TimeUnit.MINUTES.sleep(2);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

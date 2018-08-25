@@ -44,7 +44,6 @@ public class StatusManager {
                 }
             }
         }
-        System.out.println("default");
         setStatus(this.config.getStatus_default_index());
     }
 
