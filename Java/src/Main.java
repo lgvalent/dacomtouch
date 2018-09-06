@@ -17,14 +17,15 @@ import javax.swing.JOptionPane;
 public class Main {
 
     public static void main(String[] args) {
-        
-       
+
+        Tray tray = null;
+
         try {
-            Tray tray = new Tray();
+            tray = new Tray();
         } catch (AWTException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
         if (!new Config().isExists()) {
             JOptionPane.showMessageDialog(null, "Arquivo de configuração inexistente!!!");
             new DataConfigJDialog(null, true);
@@ -36,6 +37,7 @@ public class Main {
 
             try {
                 statusManager.refreshStatus();
+                tray.setTooltip("Dacomtouch\n" + statusManager.getCurrentStatus());
 
             } catch (Exception e) {
                 System.out.println("Não foi possivel atuaizar o status");
@@ -50,8 +52,6 @@ public class Main {
             }
 
         }
-
-        
 
     }
 }

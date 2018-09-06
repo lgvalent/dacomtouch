@@ -19,7 +19,9 @@ import java.awt.event.ActionListener;
  * @author rafael
  */
 public class Tray {
-
+    
+    private TrayIcon trayIcon;
+    
     public Tray() throws AWTException {
 
         if (SystemTray.isSupported()) {
@@ -41,7 +43,8 @@ public class Tray {
                     System.exit(0);
                 }
             });
-            TrayIcon trayIcon = new TrayIcon(img, "dacomtouch", popMenu);
+            this.trayIcon = new TrayIcon(img, "dacomtouch" , popMenu);
+            
             try {
                 trayIcon.setImageAutoSize(true);
                 SystemTray.getSystemTray().add(trayIcon);
@@ -53,5 +56,9 @@ public class Tray {
         } else {
             System.out.println("SystemTray is not suported!");
         }
+    }
+    
+    public void setTooltip(String tooltip){
+        this.trayIcon.setToolTip(tooltip);
     }
 }

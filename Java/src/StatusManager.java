@@ -21,6 +21,7 @@ public class StatusManager {
 
     private final Config config;
 //    private Logger log = Logger.getLogger(Status.class);
+    private String currentStatus;
 
     public StatusManager() {
         this.config = new Config();
@@ -35,16 +36,18 @@ public class StatusManager {
         this.config.readConfProperties();
 
         List<Interface> interfaces = WiFiFinder.getInstance().getList();
-                
+
         for (Map.Entry<String, Integer> entry : this.config.getStatusMap().entrySet()) {
             for (Interface interf : interfaces) {
                 if (interf.getEssid().equals(entry.getKey())) {
                     setStatus(entry.getValue());
+                    setCurrentStatus(entry.getValue());
                     return;
                 }
             }
         }
         setStatus(this.config.getStatus_default_index());
+        setCurrentStatus(this.config.getStatus_default_index());
     }
 
     public void setStatus(Integer status) throws Exception {
@@ -74,6 +77,27 @@ public class StatusManager {
         System.out.println(content);
         in.close();
         con.disconnect();
-
     }
+
+    public void setCurrentStatus(int status) {
+        switch (status) {
+            case 0:
+                this.currentStatus = "Indisponivel";
+                break;
+            case 1:
+                this.currentStatus = "Presente";
+                break;
+            case 2:
+                this.currentStatus = "PAluno";
+                break;
+            case 3:
+                this.currentStatus = "Aula";
+                break;
+        }
+    }
+
+    public String getCurrentStatus() {
+        return currentStatus;
+    }
+
 }
