@@ -24,7 +24,7 @@ public class StatusManager {
     private String currentStatus;
 
     public StatusManager() {
-        this.config = new Config();
+        this.config = Config.getInstance();
         this.config.readConfProperties();
     }
 

@@ -19,6 +19,8 @@ import java.util.Properties;
  */
 public class Config {
 
+    private static Config singleton = null;
+
     private static final String FILE_PATH = "config.properties";
     public static final String HOST = "http://valentin.com.br/dacom/";
 
@@ -40,22 +42,29 @@ public class Config {
         return exists;
     }
 
-    public Config() {
-        readConfProperties();
+    private Config() {
+        this.readConfProperties();
     }
 
-    //String url, String name, String password, String room
-    public void writeConfProperties(String login, String password, String sala, String status_default, String timer) {
+    public static Config getInstance() {
+        if (singleton == null) {
+            singleton = new Config();
+        }
+        return singleton;
+    }
+
+    //String url, String name, String password, String room       String login, String password, String sala, String status_default, String timer
+    public void writeConfProperties() {
         try {
             output = new FileOutputStream(FILE_PATH);
             // set the properties value
             prop.setProperty("actionURL", HOST + "/login.php");
             prop.setProperty("status", "dacom:1" + ',' + "UTFPRADM:3");
-            prop.setProperty("user.login", login);
-            prop.setProperty("user.password", password);
-            prop.setProperty("user.room", sala);
-            prop.setProperty("user.status_default", status_default);
-            prop.setProperty("user.timer", timer);
+            prop.setProperty("user.login", this.login);
+            prop.setProperty("user.password", this.password);
+            prop.setProperty("user.room", this.room);
+            prop.setProperty("user.status_default", String.valueOf(this.status_default_index));
+            prop.setProperty("user.timer", String.valueOf(this.timer));
             // save properties to project root folder
             prop.store(output, null);
 

@@ -26,7 +26,7 @@ public class Main {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (!new Config().isExists()) {
+        if (!Config.getInstance().isExists()) {
             JOptionPane.showMessageDialog(null, "Arquivo de configuração inexistente!!!");
             new DataConfigJDialog(null, true);
         }
@@ -45,7 +45,7 @@ public class Main {
             }
 
             try {
-                TimeUnit.SECONDS.sleep(new Config().getTimer());
+                TimeUnit.SECONDS.sleep(Config.getInstance().getTimer());
 //                TimeUnit.MINUTES.sleep(2);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

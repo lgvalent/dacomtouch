@@ -15,7 +15,7 @@ import javax.swing.SpinnerNumberModel;
  */
 public class DataConfigJDialog extends javax.swing.JDialog {
 
-    private Config config = new Config();
+    private Config config = Config.getInstance();
     /**
      * Creates new form NewJDialog
      */
@@ -205,7 +205,12 @@ public class DataConfigJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        config.writeConfProperties(loginField.getText(), String.valueOf(passwordField.getPassword()), String.valueOf(((Sala)salasComboBox.getSelectedItem()).getId()), String.valueOf(statusDefaultComboBox.getSelectedIndex()), String.valueOf(timerSpinner.getValue()));
+        config.setLogin(loginField.getText());
+        config.setPassword(String.valueOf(passwordField.getPassword()));
+        config.setRoom(String.valueOf(((Sala)salasComboBox.getSelectedItem()).getId()));
+        config.setStatus_default_index(statusDefaultComboBox.getSelectedIndex());
+        config.setTimer(Integer.parseInt(String.valueOf(timerSpinner.getValue())));
+        config.writeConfProperties();
         config.readConfProperties();
         dispose();
     }//GEN-LAST:event_saveButtonActionPerformed
