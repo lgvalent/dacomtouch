@@ -38,13 +38,15 @@ public class DataConfigJDialog extends javax.swing.JDialog {
         DefaultComboBoxModel model_room = new DefaultComboBoxModel(new Vector(salas));
         salasComboBox.setModel(model_room);
         
-        //salasComboBox.setSelectedIndex(config.getStatus_priority());
+        salasComboBox.setSelectedIndex(config.getRoom());
            
         Vector<String> disposicao = new Vector();
         disposicao.addElement("Indisponivel");
         disposicao.addElement("Presente");
         disposicao.addElement("PAluno");
         disposicao.addElement("Aula");
+        
+        salasComboBox.setSelectedIndex(config.getStatus_default_index());
         
         DefaultComboBoxModel model_status_default = new DefaultComboBoxModel(disposicao);
         statusDefaultComboBox.setModel(model_status_default);
@@ -207,7 +209,7 @@ public class DataConfigJDialog extends javax.swing.JDialog {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         config.setLogin(loginField.getText());
         config.setPassword(String.valueOf(passwordField.getPassword()));
-        config.setRoom(String.valueOf(((Sala)salasComboBox.getSelectedItem()).getId()));
+        config.setRoom(((Sala)salasComboBox.getSelectedItem()).getId());
         config.setStatus_default_index(statusDefaultComboBox.getSelectedIndex());
         config.setTimer(Integer.parseInt(String.valueOf(timerSpinner.getValue())));
         config.writeConfProperties();

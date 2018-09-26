@@ -1,5 +1,8 @@
 
 import java.awt.AWTException;
+import java.awt.GraphicsEnvironment;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,19 +28,36 @@ public class Main {
         } catch (AWTException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         if (!Config.getInstance().isExists()) {
             JOptionPane.showMessageDialog(null, "Arquivo de configuração inexistente!!!");
             new DataConfigJDialog(null, true);
         }
 
         StatusManager statusManager = new StatusManager();
-
+        
+        try {
+            statusManager.refreshStatus();
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Point mousePoint = MouseInfo.getPointerInfo().getLocation();
+        
         while (true) {
 
             try {
-                statusManager.refreshStatus();
-                tray.setTooltip("Dacomtouch\n" + statusManager.getCurrentStatus());
+                if (GraphicsEnvironment.isHeadless()) {
+                    statusManager.refreshStatus();
+                } else {
+                    Point currentMousePoint = MouseInfo.getPointerInfo().getLocation();
+                    if (mousePoint.x != currentMousePoint.x || mousePoint.y != currentMousePoint.y) {
+                        statusManager.refreshStatus();
+                        mousePoint = currentMousePoint;
+                        System.out.println("Diferente");
+                    }
+                }
+
+                tray.setTooltip("Dacomtouch (" + statusManager.getCurrentStatus() + ")");
 
             } catch (Exception e) {
                 System.out.println("Não foi possivel atuaizar o status");
@@ -46,7 +66,6 @@ public class Main {
 
             try {
                 TimeUnit.SECONDS.sleep(Config.getInstance().getTimer());
-//                TimeUnit.MINUTES.sleep(2);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }

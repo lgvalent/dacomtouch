@@ -32,7 +32,7 @@ public class Config {
     private String actionURL;
     private String login;
     private String password;
-    private String room;
+    private int room;
     private Map<String, Integer> statusMap = new LinkedHashMap<>();
     private int status_default_index;
     private int timer;
@@ -44,6 +44,14 @@ public class Config {
 
     private Config() {
         this.readConfProperties();
+        
+        new WatchingDir(System.getProperty("user.dir"), new Runnable() {
+            
+            @Override
+            public void run() {
+                readConfProperties();
+            }
+        }).start();
     }
 
     public static Config getInstance() {
@@ -62,7 +70,7 @@ public class Config {
             prop.setProperty("status", "dacom:1" + ',' + "UTFPRADM:3");
             prop.setProperty("user.login", this.login);
             prop.setProperty("user.password", this.password);
-            prop.setProperty("user.room", this.room);
+            prop.setProperty("user.room", String.valueOf(this.room));
             prop.setProperty("user.status_default", String.valueOf(this.status_default_index));
             prop.setProperty("user.timer", String.valueOf(this.timer));
             // save properties to project root folder
@@ -91,7 +99,7 @@ public class Config {
             this.status = prop.getProperty("status");
             this.login = prop.getProperty("user.login");
             this.password = prop.getProperty("user.password");
-            this.room = prop.getProperty("user.room");
+            this.room = Integer.parseInt(prop.getProperty("user.room"));
             this.timer = Integer.parseInt(prop.getProperty("user.timer"));
 
             this.status_default_index = Integer.parseInt(prop.getProperty("user.status_default"));
@@ -173,11 +181,11 @@ public class Config {
         this.password = password;
     }
 
-    public String getRoom() {
+    public int getRoom() {
         return room;
     }
 
-    public void setRoom(String room) {
+    public void setRoom(int room) {
         this.room = room;
     }
 
